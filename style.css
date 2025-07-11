@@ -1,11 +1,77 @@
+/* Shared styles (independent of theme) */
 :root {
-    --dark-gray: #282828;
-    --burgundy: #a91f1c;
-  }
-  /* Клас для використання цієї змінної як фон */
-  .bg-dark-gray {
-    background-color: var(--dark-gray);
-  }
-  .bg-burgundy {
-    background-color: var(--burgundy);
-  }
+  --font-family-sans: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-family-sans);
+}
+
+/* Theme: Dark */
+.theme-dark {
+  --bg-main: #282828;
+  --bg-secondary: #a91f1c;
+  --text-main: #ffffff;
+  --text-link-hover: #60a5fa; /* blue-400 */
+  --search-text: #000000;
+  --overlay-bg: rgba(0, 0, 0, 0.9);
+}
+
+/* Theme: Light */
+.theme-light {
+  --bg-main: #f8f8f8;
+  --bg-secondary: #e63946; /* alternative to burgundy for light theme */
+  --text-main: #000000;
+  --text-link-hover: #1d4ed8; /* blue-700 */
+  --search-text: #000000;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* Utility classes */
+.bg-main {
+  background-color: var(--bg-main);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.text-main {
+  color: var(--text-main);
+}
+
+.text-hover-link:hover {
+  color: var(--text-link-hover);
+}
+
+.overlay-navbar {
+  background-color: var(--overlay-bg);
+}
+
+.search-input {
+  color: var(--search-text);
+}
+
+.hero-overlay {
+  background-color: color-mix(in srgb, var(--bg-secondary) 80%, transparent);
+}
+
+
+#theme-toggle {
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+/* Для темної теми можна додати підсвітку при наведенні */
+body.theme-dark #theme-toggle:hover {
+  background-color: rgba(255,255,255,0.1);
+}

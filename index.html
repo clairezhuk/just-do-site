@@ -24,11 +24,9 @@
     </script>
 
 </head>
-<body class="bg-dark-gray text-white">
-
+<body class="theme-dark bg-main text-main">
   <!-- Navbar -->
-  <!-- Navbar -->
-<header class="fixed top-0 left-0 w-full h-20 bg-[rgba(0,0,0,0.9)] shadow z-50 flex items-center justify-between px-6 py-4">
+<header class="fixed top-0 left-0 w-full h-20 overlay-navbar shadow z-50 flex items-center justify-between px-6 py-4">
   <img src="assets/logo.jpg" alt="Just Do logo"
      class="w-12 h-12 rounded-lg object-cover border border-white shadow-md">
 
@@ -49,7 +47,11 @@
       <option value="ua">UA</option>
     </select>
 
-
+    <button id="theme-toggle" 
+          aria-label="Toggle theme" 
+          class="w-8 h-8 p-1 border rounded text-current hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+    <!-- Icon will be set by JS -->
+  </button>
   </div>
 
       <!-- Search input, initially hidden -->
@@ -65,9 +67,9 @@
   <!-- Sections -->
   <main class="pt-20 space-y-20">
 
-<!-- В секції Hero -->
-<section id="home" class="h-screen bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('assets/truck1.jpg')">
-  <div class="bg-[#a91f1c]/80 p-8 rounded-3xl text-center">
+<!-- Hero section -->
+<section id="home" class="h-screen bg-cover bg-center flex items-center justify-center text-main" style="background-image: url('assets/truck1.jpg')">
+  <div class="hero-overlay p-8 rounded-3xl text-center">
       <h1 id="hero-title" class="text-5xl font-bold mb-4">Just Do</h1>
       <p id="hero-subtitle" class="text-xl">Fast and reliable logistics solutions.</p>
   </div>
@@ -75,7 +77,7 @@
 
 
 <!-- About section -->
-<section id="about" class="bg-burgundy max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8 text-white">
+<section id="about" class="bg-secondary max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8 text-main">
   <div class="flex-1">
       <h2 id="about-title" class="text-3xl font-semibold mb-4">Who we are</h2>
       <p id="about-p1" class="mb-2">We are a logistics company dedicated to fast, safe, and affordable transport across Europe.</p>
@@ -85,8 +87,8 @@
 </section>
 
 
- <!-- Services -->
-<section id="services" class="bg-burgundy py-20">
+<!-- Services section -->
+<section id="services" class="bg-secondary py-20">
   <div class="max-w-6xl mx-auto px-4">
     <h2 id="services-title" class="text-3xl font-bold text-center mb-8">Our Services</h2>
     <div class="flex overflow-x-auto gap-4 snap-x snap-mandatory">
@@ -111,8 +113,8 @@
   <p id="team-desc" class="text-center">Meet the dedicated professionals behind Just Do.</p>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="bg-[#282828] py-20">
+<!-- Contact section -->
+<section id="contact" class="bg-main py-20">
   <div class="max-w-3xl mx-auto px-4 text-center">
     <h2 id="contact-title" class="text-3xl font-bold mb-4">Contact Us</h2>
     <a id="contact-email-btn" href="mailto:contact@justdo.com" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg mb-4">

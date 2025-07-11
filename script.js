@@ -92,44 +92,27 @@ const translations = {
 };
 
 
-// function updateLanguage(lang) {
-//   const t = translations[lang];
+const sunIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" 
+       stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+`;
 
-//   // Update navigation links
-//   document.getElementById('nav-home').textContent = t.navHome;
-//   document.getElementById('nav-about').textContent = t.navAbout;
-//   document.getElementById('nav-services').textContent = t.navServices;
-//   document.getElementById('nav-team').textContent = t.navTeam;
-//   document.getElementById('nav-contact').textContent = t.navContact;
-
-//   // Hero section
-//   document.getElementById('hero-title').textContent = t.heroTitle;
-//   document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
-
-//   // About section
-//   document.getElementById('about-title').textContent = t.aboutTitle;
-//   document.getElementById('about-p1').textContent = t.aboutP1;
-//   document.getElementById('about-p2').textContent = t.aboutP2;
-
-//   // Services
-//   document.getElementById('services-title').textContent = t.servicesTitle;
-//   document.getElementById('service1-title').textContent = t.service1Title;
-//   document.getElementById('service1-desc').textContent = t.service1Desc;
-//   document.getElementById('service2-title').textContent = t.service2Title;
-//   document.getElementById('service2-desc').textContent = t.service2Desc;
-
-//   // Team
-//   document.getElementById('team-title').textContent = t.teamTitle;
-//   document.getElementById('team-desc').textContent = t.teamDesc;
-
-//   // Contact
-//   document.getElementById('contact-title').textContent = t.contactTitle;
-//   document.getElementById('contact-email-btn').textContent = t.contactEmailBtn;
-//   document.getElementById('contact-email').textContent = t.contactEmail;
-//   document.getElementById('contact-phone').textContent = t.contactPhone;
-//   document.getElementById('contact-address').textContent = t.contactAddress;
-//   document.getElementById('contact-socials').innerHTML = t.contactSocials;
-// }
+const moonIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" 
+       stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+  </svg>
+`;
 
 
 // Updates all text elements according to the selected language
@@ -213,3 +196,34 @@ document.addEventListener('click', function (e) {
 // Initialize
 const initialLang = detectLanguage();
 updateLanguage(initialLang);
+
+
+const themeToggleBtn = document.getElementById('theme-toggle');
+
+// Read saved theme from localStorage or default to dark
+let currentTheme = localStorage.getItem('theme') || 'theme-dark';
+
+function applyTheme(theme) {
+  document.body.classList.remove('theme-dark', 'theme-light');
+  document.body.classList.add(theme);
+  localStorage.setItem('theme', theme);
+
+  // Змінюємо іконку залежно від теми
+  if (theme === 'theme-dark') {
+    themeToggleBtn.innerHTML = sunIcon;  // Сонце — щоб переключитись на світлу
+  } else {
+    themeToggleBtn.innerHTML = moonIcon; // Місяць — щоб переключитись на темну
+  }
+}
+
+// Початкова ініціалізація
+applyTheme(currentTheme);
+
+themeToggleBtn.addEventListener('click', () => {
+  if (currentTheme === 'theme-dark') {
+    currentTheme = 'theme-light';
+  } else {
+    currentTheme = 'theme-dark';
+  }
+  applyTheme(currentTheme);
+});
