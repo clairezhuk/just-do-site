@@ -92,10 +92,55 @@ const translations = {
 };
 
 
+// function updateLanguage(lang) {
+//   const t = translations[lang];
+
+//   // Update navigation links
+//   document.getElementById('nav-home').textContent = t.navHome;
+//   document.getElementById('nav-about').textContent = t.navAbout;
+//   document.getElementById('nav-services').textContent = t.navServices;
+//   document.getElementById('nav-team').textContent = t.navTeam;
+//   document.getElementById('nav-contact').textContent = t.navContact;
+
+//   // Hero section
+//   document.getElementById('hero-title').textContent = t.heroTitle;
+//   document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+
+//   // About section
+//   document.getElementById('about-title').textContent = t.aboutTitle;
+//   document.getElementById('about-p1').textContent = t.aboutP1;
+//   document.getElementById('about-p2').textContent = t.aboutP2;
+
+//   // Services
+//   document.getElementById('services-title').textContent = t.servicesTitle;
+//   document.getElementById('service1-title').textContent = t.service1Title;
+//   document.getElementById('service1-desc').textContent = t.service1Desc;
+//   document.getElementById('service2-title').textContent = t.service2Title;
+//   document.getElementById('service2-desc').textContent = t.service2Desc;
+
+//   // Team
+//   document.getElementById('team-title').textContent = t.teamTitle;
+//   document.getElementById('team-desc').textContent = t.teamDesc;
+
+//   // Contact
+//   document.getElementById('contact-title').textContent = t.contactTitle;
+//   document.getElementById('contact-email-btn').textContent = t.contactEmailBtn;
+//   document.getElementById('contact-email').textContent = t.contactEmail;
+//   document.getElementById('contact-phone').textContent = t.contactPhone;
+//   document.getElementById('contact-address').textContent = t.contactAddress;
+//   document.getElementById('contact-socials').innerHTML = t.contactSocials;
+// }
+
+
+// Updates all text elements according to the selected language
 function updateLanguage(lang) {
   const t = translations[lang];
+  if (!t) return;
 
-  // Update navigation links
+  // Save selected language
+  localStorage.setItem('selectedLanguage', lang);
+
+  // Navigation
   document.getElementById('nav-home').textContent = t.navHome;
   document.getElementById('nav-about').textContent = t.navAbout;
   document.getElementById('nav-services').textContent = t.navServices;
@@ -129,6 +174,9 @@ function updateLanguage(lang) {
   document.getElementById('contact-phone').textContent = t.contactPhone;
   document.getElementById('contact-address').textContent = t.contactAddress;
   document.getElementById('contact-socials').innerHTML = t.contactSocials;
+
+  // Update the selector to match current language
+  document.getElementById('language').value = lang;
 }
 
 // Detect and apply preferred or stored language
@@ -148,26 +196,13 @@ function detectLanguage() {
   }
 }
 
+// Handle manual language selection
 document.getElementById('language').addEventListener('change', (e) => {
-  const selected = e.target.value;  
-  updateLanguage(e.target.value);
+  const selected = e.target.value;
+  updateLanguage(selected);
 });
 
-// // Initialize language based on browser preferences
-// const preferredLanguages = navigator.languages.map(lang => lang.slice(0, 2).toLowerCase());
-
-// let selectedLang = 'en'; // default
-
-// if (preferredLanguages.includes('ua') || preferredLanguages.includes('uk')) {
-//   selectedLang = 'ua';
-// } else if (preferredLanguages.includes('pl')) {
-//   selectedLang = 'pl';
-// }
-
-// updateLanguage(selectedLang);
-
-
-
+// Hide search input when clicking outside
 document.addEventListener('click', function (e) {
   const input = document.getElementById('pageSearch');
   if (!input.classList.contains('hidden') && e.target !== input) {
