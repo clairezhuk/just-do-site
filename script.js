@@ -131,74 +131,42 @@ function updateLanguage(lang) {
   document.getElementById('contact-socials').innerHTML = t.contactSocials;
 }
 
+// Detect and apply preferred or stored language
+function detectLanguage() {
+  const storedLang = localStorage.getItem('selectedLanguage');
+  if (storedLang && translations[storedLang]) {
+    return storedLang;
+  }
 
+  const browserLangs = navigator.languages.map(l => l.slice(0, 2).toLowerCase());
+  if (browserLangs.includes('ua') || browserLangs.includes('uk')) {
+    return 'ua';
+  } else if (browserLangs.includes('pl')) {
+    return 'pl';
+  } else {
+    return 'en';
+  }
+}
 
 document.getElementById('language').addEventListener('change', (e) => {
+  const selected = e.target.value;  
   updateLanguage(e.target.value);
 });
 
-// Ініціалізуємо початкову мову
-const browserLang = navigator.language || navigator.userLanguage;
-const langCode = browserLang.slice(0, 2).toLowerCase();
+// // Initialize language based on browser preferences
+// const preferredLanguages = navigator.languages.map(lang => lang.slice(0, 2).toLowerCase());
 
-if (langCode === 'uk') {
-  updateLanguage('uk');
-} else if (langCode === 'pl') {
-  updateLanguage('pl');
-} else {
-  updateLanguage('en');
-}
+// let selectedLang = 'en'; // default
+
+// if (preferredLanguages.includes('ua') || preferredLanguages.includes('uk')) {
+//   selectedLang = 'ua';
+// } else if (preferredLanguages.includes('pl')) {
+//   selectedLang = 'pl';
+// }
+
+// updateLanguage(selectedLang);
 
 
-
-function triggerSearch() {
-  const input = document.getElementById('pageSearch');
-  input.classList.remove('hidden');
-  input.focus();
-
-    // При введенні тексту — підсвічуємо збіги
-  input.onkeydown = (e) => {
-    if (e.key === 'Enter') {
-      clearHighlights();
-      const query = input.value.trim();
-      if (query.length > 2) {
-        highlightText(query);
-      }
-    } else if (e.key === 'Escape') {
-      hideSearchInput();
-    }
-  };
-
-    // При натисканні Escape ховаємо поле і очищаємо підсвітку
-    input.onkeydown = (e) => {
-      if (e.key === 'Escape') {
-        input.classList.add('hidden');
-        input.value = '';
-        clearHighlights();
-      }
-    };
-  }
-
-function highlightText(text) {
-  if (!text) return;
-  const regex = new RegExp(text, 'gi');
-  const bodyText = document.body.innerHTML;
-
-  document.body.innerHTML = bodyText.replace(regex, match => `<mark>${match}</mark>`);
-}
-
-function clearHighlights() {
-  document.querySelectorAll('mark').forEach(el => {
-    el.replaceWith(el.textContent);
-  });
-}
-
-function hideSearchInput() {
-  const input = document.getElementById('pageSearch');
-  input.classList.add('hidden');
-  input.value = '';
-  clearHighlights();
-}
 
 document.addEventListener('click', function (e) {
   const input = document.getElementById('pageSearch');
@@ -207,4 +175,6 @@ document.addEventListener('click', function (e) {
   }
 });
 
-
+// Initialize
+const initialLang = detectLanguage();
+updateLanguage(initialLang);
