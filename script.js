@@ -92,29 +92,6 @@ const translations = {
 };
 
 
-const sunIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" 
-       stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
-    <circle cx="12" cy="12" r="5"/>
-    <line x1="12" y1="1" x2="12" y2="3"/>
-    <line x1="12" y1="21" x2="12" y2="23"/>
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-    <line x1="1" y1="12" x2="3" y2="12"/>
-    <line x1="21" y1="12" x2="23" y2="12"/>
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-  </svg>
-`;
-
-const moonIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" 
-       stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
-    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-  </svg>
-`;
-
-
 // Updates all text elements according to the selected language
 function updateLanguage(lang) {
   const t = translations[lang];
@@ -200,23 +177,51 @@ updateLanguage(initialLang);
 
 const themeToggleBtn = document.getElementById('theme-toggle');
 
-// Read saved theme from localStorage or default to dark
-let currentTheme = localStorage.getItem('theme') || 'theme-dark';
+const sunIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" 
+       stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+`;
+
+const moonIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" 
+       stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+  </svg>
+`;
+
+// Read saved theme from localStorage or default to system preference
+let currentTheme = localStorage.getItem('theme');
+
+if (!currentTheme) {
+  // If no saved theme, detect system preference
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  currentTheme = prefersLight ? 'theme-light' : 'theme-dark';
+}
 
 function applyTheme(theme) {
   document.body.classList.remove('theme-dark', 'theme-light');
   document.body.classList.add(theme);
   localStorage.setItem('theme', theme);
 
-  // Змінюємо іконку залежно від теми
+  // Change icon depending on theme
   if (theme === 'theme-dark') {
-    themeToggleBtn.innerHTML = sunIcon;  // Сонце — щоб переключитись на світлу
+    themeToggleBtn.innerHTML = sunIcon;  // Sun icon to switch to light
   } else {
-    themeToggleBtn.innerHTML = moonIcon; // Місяць — щоб переключитись на темну
+    themeToggleBtn.innerHTML = moonIcon; // Moon icon to switch to dark
   }
 }
 
-// Початкова ініціалізація
+// Initial apply
 applyTheme(currentTheme);
 
 themeToggleBtn.addEventListener('click', () => {
