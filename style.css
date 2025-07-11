@@ -1,0 +1,11 @@
+:root {
+    --dark-gray: #282828;
+    --burgundy: #a91f1c;
+  }
+  /* Клас для використання цієї змінної як фон */
+  .bg-dark-gray {
+    background-color: var(--dark-gray);
+  }
+  .bg-burgundy {
+    background-color: var(--burgundy);
+  }

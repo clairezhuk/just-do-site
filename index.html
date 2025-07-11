@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Just Do - Logistics</title>
+  <link href="style.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+        theme: {
+        extend: {
+            colors: {
+            burgundy: '#a91f1c', //a91f1c
+            },
+            fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            },
+        }
+        }
+    }
+    </script>
+
+</head>
+<body class="bg-dark-gray text-white">
+
+  <!-- Navbar -->
+  <!-- Navbar -->
+<header class="fixed top-0 left-0 w-full h-20 bg-[rgba(0,0,0,0.9)] shadow z-50 flex items-center justify-between px-6 py-4">
+  <img src="assets/logo.jpg" alt="Just Do logo"
+     class="w-12 h-12 rounded-lg object-cover border border-white shadow-md">
+
+  <!-- Navigation Links -->
+<nav class="space-x-4 hidden md:block text-white">
+  <a href="#home" id="nav-home" class="hover:text-blue-400">Home</a>
+  <a href="#about" id="nav-about" class="hover:text-blue-400">About</a>
+  <a href="#services" id="nav-services" class="hover:text-blue-400">Services</a>
+  <a href="#team" id="nav-team" class="hover:text-blue-400">Team</a>
+  <a href="#contact" id="nav-contact" class="hover:text-blue-400">Contact</a>
+</nav>
+
+  <!-- Language & Search -->
+  <div class="flex items-center gap-3">
+    <select id="language" class="border rounded px-2 py-1 text-black">
+      <option value="en">EN</option>
+      <option value="pl">PL</option>
+      <option value="ua">UA</option>
+    </select>
+
+    <!-- Modern Search Icon Button -->
+    <button onclick="triggerSearch()" title="Search (Ctrl+F)" class="text-white p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+      </svg>
+    </button>
+  </div>
+
+      <!-- Search input, initially hidden -->
+<input id="pageSearch"
+       type="text"
+       placeholder="Search..."
+       class="hidden absolute top-24 right-4 w-64 px-4 py-2 rounded-lg text-black z-50 shadow-lg" />
+
+
+</header>
+
+
+  <!-- Sections -->
+  <main class="pt-20 space-y-20">
+
+<!-- В секції Hero -->
+<section id="home" class="h-screen bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('assets/truck1.jpg')">
+  <div class="bg-[#a91f1c]/80 p-8 rounded-3xl text-center">
+      <h1 id="hero-title" class="text-5xl font-bold mb-4">Just Do</h1>
+      <p id="hero-subtitle" class="text-xl">Fast and reliable logistics solutions.</p>
+  </div>
+</section>
+
+
+<!-- About section -->
+<section id="about" class="bg-burgundy max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8 text-white">
+  <div class="flex-1">
+      <h2 id="about-title" class="text-3xl font-semibold mb-4">Who we are</h2>
+      <p id="about-p1" class="mb-2">We are a logistics company dedicated to fast, safe, and affordable transport across Europe.</p>
+      <p id="about-p2" class="mb-2">With years of experience and a reliable fleet, we make sure your cargo arrives on time.</p>
+  </div>
+  <img src="assets/truck2.jpg" class="w-full md:w-1/2 rounded-lg shadow" alt="Truck">
+</section>
+
+
+ <!-- Services -->
+<section id="services" class="bg-burgundy py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 id="services-title" class="text-3xl font-bold text-center mb-8">Our Services</h2>
+    <div class="flex overflow-x-auto gap-4 snap-x snap-mandatory">
+      <div class="min-w-[300px] snap-start bg-white shadow p-4 rounded">
+        <img src="assets/truck3.jpg" class="w-full rounded mb-2" alt="Service 1">
+        <h3 id="service1-title" class="text-xl font-semibold">International Shipping</h3>
+        <p id="service1-desc">Efficient cross-border freight delivery.</p>
+      </div>
+      <div class="min-w-[300px] snap-start bg-white shadow p-4 rounded">
+        <img src="assets/truck4.jpg" class="w-full rounded mb-2" alt="Service 2">
+        <h3 id="service2-title" class="text-xl font-semibold">Express Delivery</h3>
+        <p id="service2-desc">Speedy shipments within 24-48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Team -->
+<section id="team" class="max-w-4xl mx-auto px-4">
+  <h2 id="team-title" class="text-3xl font-bold text-center mb-4">Our Team</h2>
+  <p id="team-desc" class="text-center">Meet the dedicated professionals behind Just Do.</p>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="bg-[#282828] py-20">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 id="contact-title" class="text-3xl font-bold mb-4">Contact Us</h2>
+    <a id="contact-email-btn" href="mailto:contact@justdo.com" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg mb-4">
+      ✉️ Write to us
+    </a>
+    <p id="contact-email">Email: contact@justdo.com</p>
+    <p id="contact-phone">Phone: +48 123 456 789</p>
+    <p id="contact-address">Address: Warsaw, Poland</p>
+    <p id="contact-socials">Socials: <a href="#" class="text-blue-600">Facebook</a>, <a href="#" class="text-blue-600">Instagram</a></p>
+  </div>
+</section>
+  </main>
+
+</body>
+</html>
